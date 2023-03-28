@@ -15,14 +15,7 @@ public class UserServiceImpl implements IUserService{
 	
 	@Autowired
 	private UserRepo userRepo;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	public String encodePassword(String password) {
-		return passwordEncoder.encode(password).toString();
-	}
-	
+
 	@Override
 	public User addUser(User user) {
 		
@@ -30,7 +23,6 @@ public class UserServiceImpl implements IUserService{
 		if(oUser.isPresent()) {
 			//throw new UserAlreadyPresentException();
 		}
-		user.setPassword(encodePassword(user.getPassword()));
 		return userRepo.save(user);
 		
 	}
@@ -39,6 +31,12 @@ public class UserServiceImpl implements IUserService{
 	public List<User> getAllUsers() {
 		
 		return userRepo.findAll();
+	}
+
+	@Override
+	public Optional<User> getUserByEmail(String email) {
+		
+		return userRepo.findByEmail(email);
 	}
 
 }
