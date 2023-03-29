@@ -2,8 +2,6 @@ package com.assessment.UserAuth.config;
 
 
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,17 +12,11 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import com.assessment.UserAuth.entity.Role;
-import com.assessment.UserAuth.entity.User;
 
 import lombok.RequiredArgsConstructor;
 
@@ -50,8 +42,10 @@ public class SecurityConfig {
 		    .authorizeHttpRequests()
 		    .requestMatchers("/auth/**")
 		    .permitAll()
-//		    .requestMatchers("/user/test")
-//		    .hasAnyAuthority()
+		    .requestMatchers("/user/write")
+		    .hasAuthority("write")
+		    .requestMatchers("/user/read")
+		    .hasAuthority("read")
 		    .anyRequest()
 		    .authenticated()
 		    .and()
@@ -60,8 +54,7 @@ public class SecurityConfig {
 		    .and()
 		    .authenticationProvider(daoAuthenticationProvider())
 		    .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-//		    .anyRequest()
-//		    .permitAll();
+
                 
         return http.build();
     }
