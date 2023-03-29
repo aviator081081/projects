@@ -8,6 +8,8 @@ Setup:
   
   -run the project as springboot project
   
+  -to generate jar goto run as and select maven build, the jar will get generated inside the target folder
+  
   
   
   Api Calls:
