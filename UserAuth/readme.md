@@ -1,14 +1,18 @@
 Setup:
 
-  -download the repo as zip
+  -download the repo as zip and extract the UserAuth folder
   
-  -import the zip to sts ide (file->import->general-archive File)
+  -import UserAuth to sts ide (file->import->maven project->existing)
   
+  -go to project tab and select clean
+   
   -set username and password for mysql database in application.properties file(src/main/resource)
+  
+  -right click on root project package and select run as and then maven build , put "clean install" under Goals then hit enter
   
   -run the project as springboot project
   
-  -to generate jar goto run as and select maven build, the jar will get generated inside the target folder
+  -the jar will get generated inside the target folder
   
   
   
