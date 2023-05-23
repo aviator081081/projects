@@ -13,17 +13,17 @@ class ApiFeatures {
         }
       : {};
     this.query = this.query.find({ ...keyword });
-    console.log(keyword);
+    //console.log(keyword);
     return this;
   }
   filter() {
     const queryCopy = { ...this.queryStr };
     const removeFields = ["keyword", "page", "limit"];
-    console.log(queryCopy);
+    //console.log(queryCopy);
     removeFields.forEach((key) => delete queryCopy[key]);
     let queryStr = JSON.stringify(queryCopy);
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`);
-    console.log(JSON.parse(queryStr));
+    //console.log(JSON.parse(queryStr));
     this.query = this.query.find(JSON.parse(queryStr));
     return this;
   }
