@@ -14,4 +14,5 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
       url: "profilepicurl",
     },
   });
+  res.status(201).json({ success: true, user });
 });
