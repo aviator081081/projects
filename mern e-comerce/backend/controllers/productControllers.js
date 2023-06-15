@@ -135,7 +135,6 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
       useFindAndModify: false,
     }
   );
-  // await product.save({ runValidators: false });
 
   res.status(200).json({ success: true });
 });
